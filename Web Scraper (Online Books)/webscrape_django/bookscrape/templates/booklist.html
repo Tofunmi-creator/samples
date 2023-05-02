@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+<form action="" method=POST enctype="form-data">
+    {% csrf_token %}
+    <div class="container text-center">
+     <div class="row justify-content-between"  >    
+        <div class="row">
+        <div class="col">           
+               
+        {% if topic_list %}
+        <h4>List of Topics/Genre Available</h4><br>
+        <table class="table table table-striped">
+            <thead>
+            <tr>
+                <th  scope="col">Serial no.</th>
+                <th style="text-align:left" scope="col">Topic</th>                  
+            </tr>
+            </thead>
+            <tbody>
+            {% for topic in topic_list %}                
+                <tr>
+                    <th scope="row">{{ forloop.counter }} </th>           
+                    <td style="text-align:left" >{{topic}} </td>
+            {% endfor %}                        
+                </tr> 
+            {% endif %}
+            </tbody>
+        </table>
+        </div>         
+
+
+        <div class="col">
+        <br><br>  
+            {{form.as_p}}
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value='books' name='books'> Find Books</button></td>        
+        <br><br>
+        {% if topic_search %}
+
+        <h4>List of book(s) under '{{topic_search}}' category</h4>   
+        <table class="table table table-striped">
+            <thead>
+            <tr>
+                
+                <th style="text-align:center" scope="col">  Book</th>                  
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}                
+                <tr>                                
+                    <td style="text-align:center" >{{book}} </td>
+            {% endfor %}                        
+                </tr> 
+        {% endif %}
+            </tbody></table>
+        </div></div>
+        </div>
+</form>
+
+{% endblock %}
