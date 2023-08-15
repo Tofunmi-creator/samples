@@ -3,13 +3,6 @@ from sqlalchemy import create_engine, text
 from tkinter import *
 from tkinter import messagebox
 
-extract_data = "SELECT *  FROM appdata_item_records"        
-engine2 = create_engine('postgresql://postgres:1234@localhost/postgres')
-with engine2.connect() as conn:
-    rs=conn.execute(text(extract_data))
-    df = pd.DataFrame(rs.fetchall())
-    df.columns = rs.keys()
-print(df)
 
 
 engine = create_engine('postgresql://postgres:1234@localhost/new')
@@ -205,7 +198,7 @@ class user:
         self.land_page.destroy()
         print(log_var[self.acct_id], "log out Successfully!")
         del log_var[self.acct_id]
-        print("Object deleted")
+       
   
       
 
@@ -223,12 +216,9 @@ def log_in():
         print(log_var[acct_log], "created")
         try:
             log_var[acct_log].sign_in()
-            print( log_var[acct_log], "log in Successfully!")
+            print( log_var[acct_log], "logged in Successfully!")
         except AttributeError:
-            print(log_var[acct_log], "deleted")
             del log_var[acct_log]
-            print("delete successful")
-            
             pass
     except IndexError:
         pne_error=messagebox.showinfo("Error","Wrong email and password combination!")
